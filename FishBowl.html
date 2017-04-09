@@ -1,0 +1,55 @@
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.js"></script>
+<link rel="stylesheet"; href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
+<link rel="stylesheet"; href="bootstrap.min.css">
+<script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<body ng-app="myApp2" ng-controller = "login as vm">
+
+<div class="row" height= "100px">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+<table ng-table="vm.tableParams" class="table table-striped" id="fb-table" show-filter="true">
+    <tr ng-repeat="user in $data">
+        <td title="'Name'" filter="{ name: 'text'}" sortable="'name'">
+            {{user.name}}</td>
+        <td title="'Age'" filter="{ age: 'number'}" sortable="'age'">
+            {{user.age}}</td>
+        <td><button type="button">Send Promotion</button></td>
+    </tr>
+</table>
+</div>
+<div class="col-sm-4"></div>
+</div>
+</body>
+<div ng-view></div>
+
+<script>
+var app = angular.module("myApp", ["ngRoute"]);
+app.config(function($routeProvider) {
+    $routeProvider
+    .when("/", {
+        templateUrl : "main.htm"
+    })
+    .when("/red", {
+        templateUrl : "red.htm"
+    })
+    .when("/green", {
+        templateUrl : "green.htm"
+    })
+    .when("/blue", {
+        templateUrl : "blue.htm"
+    });
+});
+
+var app2 = angular.module("myApp2", ["ngTable"]);
+app2.controller('login', ['$scope', '$http','NgTableParams', function($scope, $http, NgTableParams) {
+
+var data = [{name: "Moroni", age: 50} , {name: "Moroni", age: 50} , {name: "Moroni", age: 50} , {name: "Moroni", age: 50}
+, {name: "Noro", age: 50}, {name: "Noro", age: 50}, {name: "Zoro", age: 50}, {name: "Horo", age: 50}, {name: "IIII", age: 50}
+, {name: "IJJJro", age: 50}, {name: "XXXX", age: 51}, {name: "yyy", age: 30}];
+this.tableParams = new NgTableParams({}, { dataset: data});
+}]);
+</script>
